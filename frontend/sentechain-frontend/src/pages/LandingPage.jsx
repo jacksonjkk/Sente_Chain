@@ -181,7 +181,7 @@ function Hero({ heroRef }) {
         </div>
         <div style={{ display:"flex", gap:"0", justifyContent:"center", marginTop:"64px" }}>
           {[
-            {value:"30,000+",label:"SACCOs in Kenya",color:C.green},
+            {value:"41,000+",label:"SACCOs in East Africa",color:C.green},
             {value:"4M+",label:"Members",color:C.goldMid},
             {value:"10s",label:"Blockchain seal",color:C.green},
             {value:"100%",label:"Verifiable",color:C.goldMid},
@@ -415,10 +415,10 @@ function About({ aboutRef }) {
       <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
         <div style={{ textAlign:"center", marginBottom:"60px" }}>
           <h2 style={{ fontSize:"42px", fontWeight:900, color:C.textHi, margin:"0 0 16px", fontFamily:C.font, letterSpacing:"-0.5px" }}>
-            Built for Kenya's <span style={{color:C.green}}>Cooperative Sector</span>
+            Built for East Africa's <span style={{color:C.green}}>Cooperative Sector</span>
           </h2>
           <p style={{ fontSize:"17px", color:C.textMid, maxWidth:"560px", margin:"0 auto", lineHeight:1.65, fontFamily:C.font }}>
-            Over 30,000 SACCOs manage KES 2 trillion in savings. SenteChain makes every shilling permanently verifiable for members who have no other way to check.
+            Over 41,000 SACCOs manage trillions in savings across the region serving millions who depend on them everyday. SenteChain makes every penny permanently verifiable for members who have no other way to check.
           </p>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:"20px" }}>
@@ -446,7 +446,7 @@ function CTA({ ctaRef }) {
     { accent:C.green,   text:"Every deposit sealed on Stellar in under 10 seconds" },
     { accent:C.goldMid, text:"M-Pesa payments matched to member accounts automatically" },
     { accent:C.green,   text:"Members verify their own records from any phone" },
-    { accent:C.goldMid, text:"Cashiers approve loans with full repayment schedules" },
+    { accent:C.goldMid, text:"Cashiers monitor loans with full repayment schedules" },
     { accent:C.green,   text:"Admins register members, assign roles, and view audit logs" },
     { accent:C.goldMid, text:"Public ledger accessible to regulators without any login" },
   ]
@@ -552,7 +552,7 @@ function Footer() {
               </span>
             </div>
             <p style={{ fontSize:"14px", color:"rgba(255,255,255,0.65)", lineHeight:1.65, maxWidth:"260px", margin:"0 0 20px", fontFamily:C.font }}>
-              Blockchain-powered financial transparency for Kenya's 30,000 SACCOs. Every shilling, permanently verifiable.
+              Blockchain-powered financial transparency for East Africa's 41,000 SACCOs. Every penny, permanently verifiable.
             </p>
           </div>
           {[
@@ -574,7 +574,7 @@ function Footer() {
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"14px" }}>
           <p style={{ fontSize:"13px", color:"rgba(255,255,255,0.45)", fontFamily:C.fontMono, margin:0 }}>
             &copy; {year} SenteChain. All rights reserved. Built on{" "}
-            <span style={{color:"#4ade80"}}>Stellar Blockchain</span>. Kenya.
+            <span style={{color:"#4ade80"}}>Stellar Blockchain</span>
           </p>
           <div style={{ display:"flex", gap:"24px" }}>
             {["Privacy Policy","Terms of Service","Data Protection"].map(l => (
