@@ -1,6 +1,7 @@
 // src/pages/AdminDashboard.jsx
 import { useState, useEffect } from "react"
 import { T, card, cardMd } from "../styles/theme"
+import { useAuth } from "../context/AuthContext"
 import { SACCO_INFO } from "../data/demo"
 import { apiGetMembers, apiGetTransactions, apiGetAuditLog, apiRegister, apiUpdateMemberRole, apiUpdateMemberStatus } from "../services/api"
 import Nav from "../components/Nav"
@@ -34,6 +35,7 @@ const statCard = (label, value, accent, isMobile) => (
 )
 
 export default function AdminDashboard() {
+  const { currency } = useAuth()
   const { width } = useWindowSize()
   const isMobile = width < 900
   const [tab,        setTab]        = useState("SACCO Summary")
@@ -116,9 +118,9 @@ export default function AdminDashboard() {
         {!loading && tab==="SACCO Summary" && (
           <div>
             <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap:"16px", marginBottom:"28px" }}>
-              {statCard("Total Deposits",   `KES ${(totalDeposits/1000).toFixed(0)}K`,   T.green, isMobile  )}
-              {statCard("Total Loans",      `KES ${(totalLoans/1000).toFixed(0)}K`,      T.goldMid, isMobile)}
-              {statCard("Total Repayments", `KES ${(totalRepayments/1000).toFixed(0)}K`, "#059669", isMobile)}
+              {statCard("Total Deposits",   `${currency} ${(totalDeposits/1000).toFixed(0)}K`,   T.green, isMobile  )}
+              {statCard("Total Loans",      `${currency} ${(totalLoans/1000).toFixed(0)}K`,      T.goldMid, isMobile)}
+              {statCard("Total Repayments", `${currency} ${(totalRepayments/1000).toFixed(0)}K`, "#059669", isMobile)}
               {statCard("Active Members",   activeMembers,                                "#7c3aed", isMobile)}
             </div>
             <div style={{ ...cardMd(), overflow:"hidden" }}>
@@ -141,7 +143,7 @@ export default function AdminDashboard() {
                             <p style={{ fontSize:"11px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{tx.member_id}</p>
                           </td>
                           <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:typeColor[tx.type]||T.textHi }}>{tx.type}</td>
-                          <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>KES {tx.amount_kes.toLocaleString()}</td>
+                          <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</td>
                           <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"12px", color:T.textDim }}>{tx.entry_type==="MPESA"?"M-Pesa":"Admin"}</td>
                           <td style={{ padding:"15px 20px" }}><StellarHashLink hash={tx.stellar_tx_hash} /></td>
                         </tr>
@@ -175,7 +177,7 @@ export default function AdminDashboard() {
                       <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"12px", fontWeight:700, color:T.textDim }}>{m.member_id}</td>
                       <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:T.textHi }}>{m.name}</td>
                       <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"13px", color:T.textDim }}>{m.phone}</td>
-                      <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:T.green }}>{m.balance_kes>0?`KES ${m.balance_kes.toLocaleString()}`:"None"}</td>
+                      <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:T.green }}>{m.balance_kes>0?`${currency} ${m.balance_kes.toLocaleString()}`:"None"}</td>
                       <td style={{ padding:"15px 20px" }}>
                         <select value={m.role} onChange={e=>changeRole(m.member_id,e.target.value)}
                           style={{ padding:"6px 10px", borderRadius:"8px", border:`1px solid ${T.border}`, background:"#f9fafb", color:T.textMid, fontSize:"13px", fontWeight:600, cursor:"pointer", outline:"none", fontFamily:T.font }}>
@@ -260,7 +262,7 @@ export default function AdminDashboard() {
                           <p style={{ fontSize:"11px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{tx.member_id}</p>
                         </td>
                         <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:typeColor[tx.type]||T.textHi }}>{tx.type}</td>
-                        <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>KES {tx.amount_kes.toLocaleString()}</td>
+                        <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</td>
                         <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"12px", color:T.textDim }}>{tx.entry_type==="MPESA"?"M-Pesa":"Admin"}</td>
                         <td style={{ padding:"15px 20px" }}><span style={{ padding:"3px 10px", borderRadius:"99px", fontSize:"11px", fontFamily:T.fontMono, fontWeight:700, background:T.greenLite, color:T.green, border:`1px solid ${T.greenBdr}` }}>CONFIRMED</span></td>
                         <td style={{ padding:"15px 20px" }}><StellarHashLink hash={tx.stellar_tx_hash} /></td>

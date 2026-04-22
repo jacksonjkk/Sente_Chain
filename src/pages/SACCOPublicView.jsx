@@ -4,6 +4,7 @@ import StellarHashLink from "../components/StellarHashLink"
 import { apiGetSaccoSummary, apiGetMembers, apiGetTransactions } from "../services/api"
 import { T, card, cardMd } from "../styles/theme"
 import { useAuth } from "../context/AuthContext"
+import { EAC_COUNTRIES } from "../data/countries"
 
 // Mobile detection hook
 function useWindowSize() {
@@ -17,7 +18,7 @@ function useWindowSize() {
 }
 
 export default function SACCOPublicView() {
-  const { auth }    = useAuth()
+  const { auth, currency, setCurrency } = useAuth()
   const navigate    = useNavigate()
   const { saccoId } = useParams()
   const { width }   = useWindowSize()
@@ -55,7 +56,29 @@ export default function SACCOPublicView() {
           )}
           {isMobile ? null : <span style={{ fontSize:"11px", fontFamily:T.fontMono, fontWeight:700, padding:"4px 12px", borderRadius:"99px", letterSpacing:"1px", background:T.greenLite, color:T.green, border:`1px solid ${T.greenBdr}`, textTransform:"uppercase" }}>Public Ledger</span>}
         </div>
-        {auth ? (
+        
+        <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
+          {!isMobile && (
+            <select 
+              value={EAC_COUNTRIES.find(c => c.currency === currency)?.code || "KE"} 
+              onChange={(e) => {
+                const c = EAC_COUNTRIES.find(x => x.code === e.target.value)
+                setCurrency(c.currency)
+              }}
+              style={{ 
+                fontSize:"13px", fontWeight:700, padding:"7px 10px", 
+                borderRadius:"9px", border:`1.5px solid ${T.border}`, 
+                background:T.surface, color:T.textMid, cursor:"pointer", 
+                outline:"none", fontFamily:T.font
+              }}
+            >
+              {EAC_COUNTRIES.map(c => (
+                <option key={c.code} value={c.code}>{c.flag} {c.currency}</option>
+              ))}
+            </select>
+          )}
+          
+          {auth ? (
           <button onClick={()=>navigate("/dashboard")} style={{ padding: isMobile ? "7px 16px" : "9px 22px", borderRadius:"9px", border:"none", fontFamily:T.font, background:T.green, color:"#fff", fontSize: isMobile ? "12px" : "14px", fontWeight:700, cursor:"pointer", boxShadow:`0 2px 12px ${T.green}44`, transition:"all 0.18s" }}
             onMouseEnter={e=>e.currentTarget.style.background=T.greenDark}
             onMouseLeave={e=>e.currentTarget.style.background=T.green}>
@@ -68,6 +91,7 @@ export default function SACCOPublicView() {
             Sign In
           </button>
         )}
+        </div>
       </nav>
 
       <div style={{ maxWidth:"1040px", margin:"0 auto", padding: isMobile ? "30px 16px 60px" : "60px 40px 80px" }}>
@@ -87,9 +111,9 @@ export default function SACCOPublicView() {
 
             <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap:"16px", marginBottom:"32px" }}>
               {[
-                {label:"Total Deposits",   value:`KES ${summary.total_deposits.toLocaleString()}`,   accent:T.green  },
-                {label:"Total Loans",      value:`KES ${summary.total_loans.toLocaleString()}`,      accent:T.goldMid},
-                {label:"Total Repayments", value:`KES ${summary.total_repayments.toLocaleString()}`, accent:"#059669"},
+                {label:"Total Deposits",   value:`${currency} ${summary.total_deposits.toLocaleString()}`,   accent:T.green  },
+                {label:"Total Loans",      value:`${currency} ${summary.total_loans.toLocaleString()}`,      accent:T.goldMid},
+                {label:"Total Repayments", value:`${currency} ${summary.total_repayments.toLocaleString()}`, accent:"#059669"},
                 {label:"Active Members",   value:summary.active_members,                              accent:"#7c3aed"},
               ].map(c => (
                 <div key={c.label} style={{ ...cardMd(), padding: isMobile ? "16px" : "24px", position:"relative", overflow:"hidden" }}>
@@ -140,7 +164,7 @@ export default function SACCOPublicView() {
                           <p style={{ fontSize:"14px", fontWeight:700, color:T.textHi, margin:"0 0 2px" }}>{tx.type}</p>
                           <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{tx.entry_type==="MPESA"?"M-Pesa":"Admin"}</p>
                         </div>
-                        <span style={{ fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:typeColor[tx.type]||T.textHi }}>KES {tx.amount_kes.toLocaleString()}</span>
+                        <span style={{ fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:typeColor[tx.type]||T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</span>
                       </div>
                       {i<arr.slice(0,6).length-1 && <div style={{ height:1, background:T.border2, margin: isMobile ? "0 16px" : "0 24px" }} />}
                     </div>

@@ -1,6 +1,7 @@
 // src/pages/CashierDashboard.jsx
 import { useState, useEffect } from "react"
 import { T, card, cardMd } from "../styles/theme"
+import { useAuth } from "../context/AuthContext"
 import { SACCO_INFO } from "../data/demo"
 import { apiGetLoans, apiApproveLoan, apiRejectLoan, apiGetMembers, apiGetTransactions } from "../services/api"
 import Nav from "../components/Nav"
@@ -38,6 +39,7 @@ const statCard = (label, value, accent, isMobile) => (
 )
 
 export default function CashierDashboard() {
+  const { currency } = useAuth()
   const { width } = useWindowSize()
   const isMobile = width < 900
   const [tab,      setTab]      = useState("Loan Requests")
@@ -103,7 +105,7 @@ export default function CashierDashboard() {
           {statCard("Pending Loans",  pendingLoans.length,                                       T.goldMid, isMobile)}
           {statCard("Active Loans",   activeLoans.length,                                        T.gold, isMobile   )}
           <div style={{ gridColumn: isMobile ? "span 2" : "auto" }}>
-            {statCard("Outstanding",    `KES ${(activeLoans.reduce((s,l)=>s+l.balance_remaining,0)/1000).toFixed(0)}K`, "#7c3aed", isMobile)}
+            {statCard("Outstanding",    `${currency} ${(activeLoans.reduce((s,l)=>s+l.balance_remaining,0)/1000).toFixed(0)}K`, "#7c3aed", isMobile)}
           </div>
         </div>
 
@@ -140,7 +142,7 @@ export default function CashierDashboard() {
                       <p style={{ fontSize:"13px", color:T.textDim, margin:0 }}>Applied {loan.applied_on} {loan.phone}</p>
                     </div>
                     <div style={{ textAlign:"right" }}>
-                      <p style={{ fontSize:"24px", fontWeight:900, color:T.goldMid, margin:0 }}>KES {loan.amount_requested.toLocaleString()}</p>
+                      <p style={{ fontSize:"24px", fontWeight:900, color:T.goldMid, margin:0 }}>{currency} {loan.amount_requested.toLocaleString()}</p>
                       <p style={{ fontSize:"12px", color:T.textDim }}>Requested</p>
                     </div>
                   </div>
@@ -149,10 +151,10 @@ export default function CashierDashboard() {
                       {label:"Purpose",             value:loan.purpose},
                       {label:"Term",                value:`${loan.term_months} months`},
                       {label:"Interest Rate",       value:`${loan.interest_rate}% p.a.`},
-                      {label:"Monthly Installment", value:`KES ${loan.monthly_installment.toLocaleString()}`},
-                      {label:"Total Repayable",     value:`KES ${loan.total_repayable.toLocaleString()}`},
-                      {label:"Total Interest",      value:`KES ${loan.total_interest.toLocaleString()}`},
-                      {label:"Savings Balance",     value:`KES ${loan.savings_balance.toLocaleString()}`},
+                      {label:"Monthly Installment", value:`${currency} ${loan.monthly_installment.toLocaleString()}`},
+                      {label:"Total Repayable",     value:`${currency} ${loan.total_repayable.toLocaleString()}`},
+                      {label:"Total Interest",      value:`${currency} ${loan.total_interest.toLocaleString()}`},
+                      {label:"Savings Balance",     value:`${currency} ${loan.savings_balance.toLocaleString()}`},
                       {label:"Collateral",          value:loan.collateral},
                     ].map(f => (
                       <div key={f.label} style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:"10px", padding:"12px 14px" }}>
@@ -183,7 +185,7 @@ export default function CashierDashboard() {
                       <p style={{ fontSize:"12px", color:T.textDim, margin:0 }}>{loan.purpose}</p>
                     </div>
                     <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
-                      <p style={{ fontSize:"15px", fontWeight:700, color:T.textMid, fontFamily:T.fontMono }}>KES {loan.amount_requested.toLocaleString()}</p>
+                      <p style={{ fontSize:"15px", fontWeight:700, color:T.textMid, fontFamily:T.fontMono }}>{currency} {loan.amount_requested.toLocaleString()}</p>
                       <StatusBadge status="rejected" />
                     </div>
                   </div>
@@ -209,15 +211,15 @@ export default function CashierDashboard() {
                     <p style={{ fontSize:"13px", color:T.textDim, margin:0 }}>{loan.purpose} Disbursed {loan.disbursed_on}</p>
                   </div>
                   <div style={{ textAlign:"right" }}>
-                    <p style={{ fontSize:"24px", fontWeight:900, color:loan.status==="completed"?"#7c3aed":T.goldMid, margin:0 }}>KES {loan.amount_requested.toLocaleString()}</p>
+                    <p style={{ fontSize:"24px", fontWeight:900, color:loan.status==="completed"?"#7c3aed":T.goldMid, margin:0 }}>{currency} {loan.amount_requested.toLocaleString()}</p>
                     <p style={{ fontSize:"12px", color:T.textDim }}>Original amount</p>
                   </div>
                 </div>
                 <div style={{ padding:"20px 28px", display:"grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap:"14px", borderBottom:`1px solid ${T.border}` }}>
                   {[
-                    {label:"Monthly Payment",  value:`KES ${loan.monthly_installment.toLocaleString()}`,                                                                            color:T.goldMid},
-                    {label:"Repaid So Far",     value:`KES ${loan.repaid_so_far.toLocaleString()}`,                                                                                 color:T.green  },
-                    {label:"Balance Remaining", value:loan.status==="completed"?"Cleared":`KES ${loan.balance_remaining.toLocaleString()}`, color:loan.status==="completed"?T.green:T.red},
+                    {label:"Monthly Payment",  value:`${currency} ${loan.monthly_installment.toLocaleString()}`,                                                                            color:T.goldMid},
+                    {label:"Repaid So Far",     value:`${currency} ${loan.repaid_so_far.toLocaleString()}`,                                                                                 color:T.green  },
+                    {label:"Balance Remaining", value:loan.status==="completed"?"Cleared":`${currency} ${loan.balance_remaining.toLocaleString()}`, color:loan.status==="completed"?T.green:T.red},
                   ].map(f => (
                     <div key={f.label} style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:"10px", padding:"14px 16px" }}>
                       <p style={{ fontSize:"10px", fontWeight:700, color:T.textDim, textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:"6px", fontFamily:T.fontMono }}>{f.label}</p>
@@ -254,9 +256,9 @@ export default function CashierDashboard() {
                                 onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
                                 <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, color:T.textDim }}>{p.month}</td>
                                 <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, color:T.textMid }}>{p.due_date}</td>
-                                <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, fontWeight:600, color:T.textHi }}>KES {p.principal.toLocaleString()}</td>
-                                <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, color:T.goldMid }}>KES {p.interest.toLocaleString()}</td>
-                                <td style={{ padding:"13px 20px", fontSize:"14px", fontFamily:T.fontMono, fontWeight:800, color:T.textHi }}>KES {p.total.toLocaleString()}</td>
+                                <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, fontWeight:600, color:T.textHi }}>{currency} {p.principal.toLocaleString()}</td>
+                                <td style={{ padding:"13px 20px", fontSize:"13px", fontFamily:T.fontMono, color:T.goldMid }}>{currency} {p.interest.toLocaleString()}</td>
+                                <td style={{ padding:"13px 20px", fontSize:"14px", fontFamily:T.fontMono, fontWeight:800, color:T.textHi }}>{currency} {p.total.toLocaleString()}</td>
                                 <td style={{ padding:"13px 20px" }}><StatusBadge status={p.status} /></td>
                               </tr>
                             ))}
@@ -295,7 +297,7 @@ export default function CashierDashboard() {
                       <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"12px", fontWeight:700, color:T.textDim }}>{m.member_id}</td>
                       <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:T.textHi }}>{m.name}</td>
                       <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"13px", color:T.textDim }}>{m.phone}</td>
-                      <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:T.green }}>{m.balance_kes>0?`KES ${m.balance_kes.toLocaleString()}`:"None"}</td>
+                      <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:T.green }}>{m.balance_kes>0?`${currency} ${m.balance_kes.toLocaleString()}`:"None"}</td>
                       <td style={{ padding:"15px 20px" }}>
                         <span style={{ padding:"3px 10px", borderRadius:"99px", fontSize:"11px", fontFamily:T.fontMono, fontWeight:700, textTransform:"uppercase", background:m.role==="admin"?"rgba(124,58,237,0.08)":m.role==="cashier"?T.goldLite:T.surface, color:m.role==="admin"?T.purple:m.role==="cashier"?T.goldMid:T.textMid, border:`1px solid ${m.role==="admin"?T.purpleBdr:m.role==="cashier"?T.goldBdr:T.border}` }}>{m.role}</span>
                       </td>
@@ -329,7 +331,7 @@ export default function CashierDashboard() {
               <div style={{ ...cardMd(), overflow:"hidden" }}>
                 <div style={{ padding:"18px 24px", borderBottom:`1.5px solid ${T.border}`, background:"#fff" }}>
                   <p style={{ fontSize:"17px", fontWeight:800, color:T.textHi, margin:"0 0 3px" }}>{selected.name}</p>
-                  <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{selected.member_id} Balance: KES {selected.balance_kes.toLocaleString()}</p>
+                  <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{selected.member_id} Balance: {currency} {selected.balance_kes.toLocaleString()}</p>
                 </div>
                 <div style={{ overflowX:"auto" }}>
                   <table style={{ width:"100%", borderCollapse:"collapse" }}>
@@ -343,7 +345,7 @@ export default function CashierDashboard() {
                             onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
                             <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"13px", color:T.textDim }}>{new Date(tx.recorded_at).toLocaleDateString("en-KE",{day:"2-digit",month:"short",year:"numeric"})}</td>
                             <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:typeColor[tx.type]||T.textHi }}>{tx.type}</td>
-                            <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>KES {tx.amount_kes.toLocaleString()}</td>
+                            <td style={{ padding:"15px 20px", fontFamily:T.fontMono, fontSize:"15px", fontWeight:800, color:T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</td>
                             <td style={{ padding:"15px 20px" }}><span style={{ padding:"3px 10px", borderRadius:"8px", fontSize:"12px", fontFamily:T.fontMono, fontWeight:600, background:m.bg, color:m.color, border:`1px solid ${m.bdr}` }}>{m.label}</span></td>
                             <td style={{ padding:"15px 20px" }}><StatusBadge status={tx.status} /></td>
                             <td style={{ padding:"15px 20px" }}><StellarHashLink hash={tx.stellar_tx_hash} /></td>

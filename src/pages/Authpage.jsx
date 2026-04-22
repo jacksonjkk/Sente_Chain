@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { apiLogin, apiRegister, apiContact } from "../services/api"
+import { EAC_COUNTRIES } from "../data/countries"
 
 // Mobile detection hook
 function useWindowSize() {
@@ -118,18 +119,27 @@ function AuthNav() {
 }
 
 function SignUpPanel({ onSwitch }) {
+  const { setCurrency } = useAuth()
   const [name,    setName]    = useState("")
   const [phone,   setPhone]   = useState("")
+  const [country, setCountry] = useState(EAC_COUNTRIES[0]) // Default to Kenya
   const [pin,     setPin]     = useState("")
   const [showPin, setShowPin] = useState(false)
   const [ok,      setOk]      = useState(false)
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState("")
 
+  const handleCountryChange = (e) => {
+    const c = EAC_COUNTRIES.find(x => x.code === e.target.value)
+    setCountry(c)
+    setCurrency(c.currency)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault(); setError(""); setLoading(true)
+    const fullPhone = country.prefix + phone.replace(/^0+/, "") // Remove leading zero if any
     try {
-      await apiRegister({ name, phone, role:"member" })
+      await apiRegister({ name, phone: fullPhone, role:"member" })
       setOk(true)
       setTimeout(() => { setOk(false); setName(""); setPhone(""); setPin("") }, 5000)
     } catch(err) { setError(err.message || "Registration failed.") }
@@ -144,7 +154,22 @@ function SignUpPanel({ onSwitch }) {
         <p style={{ fontSize:"14px", color:C.textDim, margin:"0 0 28px", fontFamily:C.font }}>Register to access your SACCO financial records on the blockchain</p>
         <form onSubmit={handleSubmit} style={{ display:"flex", flexDirection:"column", gap:"16px" }}>
           <div><Lbl text="Full Name" /><input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="e.g. Sarah Wanjiku" required style={inp()} onFocus={onFG} onBlur={onBG} /></div>
-          <div><Lbl text="Phone Number" /><input type="tel" value={phone} onChange={e=>setPhone(e.target.value)} placeholder="0700 000 001" required style={inp()} onFocus={onFG} onBlur={onBG} /></div>
+          <div>
+            <Lbl text="Phone Number" />
+            <div style={{ display:"flex", gap:"8px" }}>
+              <select 
+                value={country.code} 
+                onChange={handleCountryChange}
+                style={{ ...inp(), width:"100px", padding:"13px 8px", cursor:"pointer" }}
+                onFocus={onFG} onBlur={onBG}
+              >
+                {EAC_COUNTRIES.map(c => (
+                  <option key={c.code} value={c.code}>{c.flag} {c.prefix}</option>
+                ))}
+              </select>
+              <input type="tel" value={phone} onChange={e=>setPhone(e.target.value)} placeholder="700 000 001" required style={inp()} onFocus={onFG} onBlur={onBG} />
+            </div>
+          </div>
           <div>
             <Lbl text="Create PIN" />
             <div style={{ position:"relative" }}>

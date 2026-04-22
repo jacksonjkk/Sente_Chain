@@ -30,7 +30,7 @@ const TH = (h) => (
 )
 
 export default function MemberDashboard() {
-  const { auth } = useAuth()
+  const { auth, currency } = useAuth()
   const { width } = useWindowSize()
   const isMobile = width < 900
   const [txs,     setTxs]     = useState([])
@@ -74,7 +74,7 @@ export default function MemberDashboard() {
             <div key={c.label} style={{ ...card(), padding: isMobile ? "16px" : "24px", position:"relative", overflow:"hidden" }}>
               <div style={{ position:"absolute", top:0, left:0, right:0, height:"3px", background:c.accent, borderRadius:"18px 18px 0 0" }} />
               <p style={{ fontSize:"10px", fontWeight:700, color:T.textDim, textTransform:"uppercase", letterSpacing:"1px", marginBottom:"10px", fontFamily:T.fontMono }}>{c.label}</p>
-              <p style={{ fontSize: isMobile ? "18px" : "22px", fontWeight:900, color:T.textHi, fontVariantNumeric:"tabular-nums" }}>KES {c.value.toLocaleString()}</p>
+              <p style={{ fontSize: isMobile ? "18px" : "22px", fontWeight:900, color:T.textHi, fontVariantNumeric:"tabular-nums" }}>{currency} {c.value.toLocaleString()}</p>
             </div>
           ))}
         </div>
@@ -122,7 +122,7 @@ export default function MemberDashboard() {
                         onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
                         <td style={{ padding:"15px 20px", fontSize:"13px", fontFamily:T.fontMono, color:T.textDim }}>{new Date(tx.recorded_at).toLocaleDateString("en-KE",{day:"2-digit",month:"short",year:"numeric"})}</td>
                         <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:700, color:typeColor[tx.type]||T.textHi }}>{tx.type}</td>
-                        <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:800, color:T.textHi, fontFamily:T.fontMono }}>KES {tx.amount_kes.toLocaleString()}</td>
+                        <td style={{ padding:"15px 20px", fontSize:"15px", fontWeight:800, color:T.textHi, fontFamily:T.fontMono }}>{currency} {tx.amount_kes.toLocaleString()}</td>
                         <td style={{ padding:"15px 20px" }}><span style={{ padding:"3px 10px", borderRadius:"8px", fontSize:"12px", fontFamily:T.fontMono, fontWeight:600, background:m.bg, color:m.color, border:`1px solid ${m.bdr}` }}>{m.label}</span></td>
                         <td style={{ padding:"15px 20px" }}><StatusBadge status={tx.status} /></td>
                         <td style={{ padding:"15px 20px" }}><StellarHashLink hash={tx.stellar_tx_hash} /></td>

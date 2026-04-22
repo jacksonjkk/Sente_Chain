@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { T } from "../styles/theme"
+import { EAC_COUNTRIES } from "../data/countries"
 
 // Mobile detection hook
 function useWindowSize() {
@@ -22,7 +23,7 @@ const roleTag = {
 }
 
 export default function Nav() {
-  const { auth, logout } = useAuth()
+  const { auth, logout, currency, setCurrency } = useAuth()
   const navigate = useNavigate()
   const { width } = useWindowSize()
   const isMobile = width < 900
@@ -66,6 +67,26 @@ export default function Nav() {
           onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border;e.currentTarget.style.color=T.textMid}}>
           Public View
         </button>
+
+        {!isMobile && (
+          <select 
+            value={EAC_COUNTRIES.find(c => c.currency === currency)?.code || "KE"} 
+            onChange={(e) => {
+              const c = EAC_COUNTRIES.find(x => x.code === e.target.value)
+              setCurrency(c.currency)
+            }}
+            style={{ 
+              fontSize:"13px", fontWeight:700, padding:"7px 10px", 
+              borderRadius:"9px", border:`1.5px solid ${T.border}`, 
+              background:T.surface, color:T.textMid, cursor:"pointer", 
+              outline:"none", fontFamily:T.font
+            }}
+          >
+            {EAC_COUNTRIES.map(c => (
+              <option key={c.code} value={c.code}>{c.flag} {c.currency}</option>
+            ))}
+          </select>
+        )}
 
         {auth && (
           <button onClick={handleLogout} style={{ 

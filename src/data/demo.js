@@ -10,6 +10,7 @@ export const DEMO_USERS = [
   { phone:"0700000001", pin:"1234", role_code:null,     role:"member",  name:"Sarah Wanjiku", member_id:"MBR001", sacco_id:"SACCO01", balance_kes:24750, status:"active",    joined:"2024-01-15" },
   { phone:"0700000002", pin:"5678", role_code:"CSH2026", role:"cashier", name:"John Kamau",   member_id:"CSH001", sacco_id:"SACCO01", balance_kes:0,     status:"active",    joined:"2023-06-01" },
   { phone:"0700000003", pin:"9012", role_code:"ADM2026", role:"admin",   name:"Grace Akinyi", member_id:"ADM001", sacco_id:"SACCO01", balance_kes:0,     status:"active",    joined:"2023-01-01" },
+  { phone:"+254700000000", pin:"1234", role_code:null,     role:"member",  name:"Jackson J.K.", member_id:"MBR006", sacco_id:"SACCO01", balance_kes:15000, status:"active",    joined:"2024-04-22" },
 ]
 
 export const DEMO_MEMBERS = [
@@ -20,6 +21,7 @@ export const DEMO_MEMBERS = [
   { member_id:"MBR005", name:"Agnes Chebet",  phone:"0760000005", balance_kes:51000, status:"active",    role:"member",  joined:"2023-07-14" },
   { member_id:"CSH001", name:"John Kamau",    phone:"0700000002", balance_kes:0,     status:"active",    role:"cashier", joined:"2023-06-01" },
   { member_id:"ADM001", name:"Grace Akinyi",  phone:"0700000003", balance_kes:0,     status:"active",    role:"admin",   joined:"2023-01-01" },
+  { member_id:"MBR006", name:"Jackson J.K.", phone:"+254700000000", balance_kes:15000, status:"active",    role:"member",  joined:"2024-04-22" },
 ]
 
 export const DEMO_TRANSACTIONS = {
