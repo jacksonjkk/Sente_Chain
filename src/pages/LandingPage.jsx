@@ -211,7 +211,11 @@ function Hero({ heroRef }) {
 
   return (
     <section ref={heroRef} style={{
-      background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #fefce8 70%)",
+      background: isMobile 
+        ? "linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #fefce8 70%)"
+        : `linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(254, 252, 232, 0.9) 70%), url("/image5.jpg")`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
       paddingTop: isMobile ? "100px" : "140px",
       paddingBottom: isMobile ? "60px" : "100px",
       position: "relative",

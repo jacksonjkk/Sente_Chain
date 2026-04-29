@@ -11,6 +11,7 @@ import SACCORegistration from "./pages/SACCORegistration"
 import VerificationPending from "./pages/VerificationPending"
 import MemberOnboarding from "./pages/MemberOnboarding"
 import MemberVerificationPending from "./pages/MemberVerificationPending"
+import ProjectAdminDashboard from "./pages/ProjectAdminDashboard"
 
 function RoleRoute() {
   const { auth } = useAuth()
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/member-onboarding" element={<MemberOnboarding />} />
           <Route path="/verification-pending" element={<VerificationPending />} />
           <Route path="/member-verification-pending" element={<MemberVerificationPending />} />
+          <Route path="/sc-project-master-gate" element={<ProjectAdminDashboard />} />
           <Route path="/dashboard"      element={<RoleRoute />} />
           <Route path="*"               element={<Navigate to="/" replace />} />
         </Routes>

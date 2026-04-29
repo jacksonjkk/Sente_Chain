@@ -20,7 +20,7 @@ function useWindowSize() {
 }
 
 const typeColor = { Deposit: T.green, Loan: T.goldMid, Repayment: "#059669" }
-const TABS = ["SACCO Summary", "Members and Roles", "Register Member", "SACCO Onboarding", "All Transactions", "Audit Log"]
+const TABS = ["SACCO Summary", "Members and Roles", "Register Member", "All Transactions", "Audit Log"]
 
 const TH = (h) => (
   <th key={h} style={{ padding: "12px 20px", textAlign: "left", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", color: T.textDim, borderBottom: `1.5px solid ${T.border}`, background: T.surface, whiteSpace: "nowrap", fontFamily: T.fontMono }}>{h}</th>
@@ -48,10 +48,7 @@ export default function AdminDashboard() {
   const [regOk, setRegOk] = useState(false)
   const [regLoading, setRegLoading] = useState(false)
   const [regErr, setRegErr] = useState("")
-  const [onboarding, setOnboarding] = useState([
-    { id: "S-001", name: "Rift Valley Dairy SACCO", regNo: "CS/2023/102", status: "pending", date: "2026-04-24", country: "Kenya", score: 85 },
-    { id: "S-002", name: "Kampala Boda Boda Cooperative", regNo: "UG/REG/552", status: "under_review", date: "2026-04-23", country: "Uganda", score: 72 }
-  ])
+
 
   useEffect(() => {
     async function load() {
@@ -302,65 +299,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* SACCO ONBOARDING */}
-        {!loading && tab === "SACCO Onboarding" && (
-          <div style={{ ...cardMd(), overflow: "hidden" }}>
-            <div style={{ padding: "18px 24px", borderBottom: `1.5px solid ${T.border}`, background: "#fff" }}>
-              <h2 style={{ fontSize: "17px", fontWeight: 800, color: T.textHi, margin: 0 }}>New SACCO Registrations</h2>
-            </div>
 
-            {isMobile ? (
-              <div style={{ padding: "16px", display: "grid", gap: "16px" }}>
-                {onboarding.map(s => (
-                  <div key={s.id} style={{ padding: "20px", background: "#fff", border: `1px solid ${T.border}`, borderRadius: "12px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
-                      <p style={{ fontSize: "14px", fontWeight: 800, color: T.textHi }}>{s.name}</p>
-                      <StatusBadge status={s.status} />
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
-                      <div>
-                        <p style={{ fontSize: "10px", fontWeight: 700, color: T.textDim, textTransform: "uppercase" }}>Reg No</p>
-                        <p style={{ fontSize: "12px", fontFamily: T.fontMono }}>{s.regNo}</p>
-                      </div>
-                      <div>
-                        <p style={{ fontSize: "10px", fontWeight: 700, color: T.textDim, textTransform: "uppercase" }}>Risk Score</p>
-                        <p style={{ fontSize: "14px", fontWeight: 800, color: s.score > 80 ? T.green : T.goldMid }}>{s.score}%</p>
-                      </div>
-                    </div>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <button style={{ flex: 1, padding: "10px", borderRadius: "8px", border: "none", background: T.green, color: "#fff", fontSize: "12px", fontWeight: 700 }} onClick={() => alert("SACCO Approved.")}>Approve</button>
-                      <button style={{ flex: 1, padding: "10px", borderRadius: "8px", border: `1px solid ${T.border}`, background: "#fff", color: T.textDim, fontSize: "12px", fontWeight: 700 }}>Details</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <thead><tr>{["Date", "SACCO Name", "Reg No", "Country", "Risk Score", "Status", "Actions"].map(TH)}</tr></thead>
-                  <tbody>
-                    {onboarding.map((s, i) => (
-                      <tr key={s.id} style={{ borderBottom: i < onboarding.length - 1 ? `1px solid ${T.border2}` : "none", background: "#fff" }}>
-                        <td style={{ padding: "15px 20px", fontFamily: T.fontMono, fontSize: "13px", color: T.textDim }}>{s.date}</td>
-                        <td style={{ padding: "15px 20px", fontSize: "15px", fontWeight: 700, color: T.textHi }}>{s.name}</td>
-                        <td style={{ padding: "15px 20px", fontFamily: T.fontMono, fontSize: "13px", color: T.textDim }}>{s.regNo}</td>
-                        <td style={{ padding: "15px 20px", fontSize: "14px", color: T.textMid }}>{s.country}</td>
-                        <td style={{ padding: "15px 20px" }}>
-                          <span style={{ fontSize: "14px", fontWeight: 800, color: s.score > 80 ? T.green : T.goldMid }}>{s.score}%</span>
-                        </td>
-                        <td style={{ padding: "15px 20px" }}><StatusBadge status={s.status} /></td>
-                        <td style={{ padding: "15px 20px", display: "flex", gap: "8px" }}>
-                          <button style={{ padding: "6px 12px", borderRadius: "6px", border: "none", background: T.green, color: "#fff", fontSize: "12px", fontWeight: 700, cursor: "pointer" }} onClick={() => alert("SACCO Approved and notified via official email.")}>Approve</button>
-                          <button style={{ padding: "6px 12px", borderRadius: "6px", border: `1px solid ${T.border}`, background: "#fff", color: T.textDim, fontSize: "12px", fontWeight: 700, cursor: "pointer" }}>Details</button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* ALL TRANSACTIONS */}
         {!loading && tab === "All Transactions" && (

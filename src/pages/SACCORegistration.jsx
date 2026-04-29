@@ -44,7 +44,7 @@ export default function SACCORegistration() {
   const [agreed, setAgreed] = useState(false)
   const [country, setCountry] = useState(EAC_COUNTRIES[0])
   const [formData, setFormData] = useState({
-    name: "", regNo: "", type: "Deposit-taking",
+    name: "", type: "Deposit-taking",
     address: "", phone: "", email: "",
     chairmanName: "", chairmanID: "", chairmanVerified: false, chairmanImage: null,
     secretaryName: "", secretaryID: "", secretaryVerified: false, secretaryImage: null,
@@ -435,7 +435,7 @@ export default function SACCORegistration() {
               
               <div style={{ textAlign: "left", background: C.surface, padding: "20px", borderRadius: "12px", border: `1px solid ${C.border}`, marginBottom: "24px" }}>
                 <p style={{ fontSize: "13px", margin: "0 0 8px", color: C.textHi }}><strong>SACCO:</strong> {formData.name || "N/A"}</p>
-                <p style={{ fontSize: "13px", margin: "0 0 8px", color: C.textHi }}><strong>Reg No:</strong> {formData.regNo || "N/A"}</p>
+
                 <p style={{ fontSize: "13px", margin: 0, color: C.textHi }}><strong>Chairman:</strong> {formData.chairmanName || "N/A"}</p>
               </div>
 
