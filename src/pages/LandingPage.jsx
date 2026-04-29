@@ -294,18 +294,18 @@ function Slider({ sliderRef }) {
 
   return (
     <section ref={sliderRef} style={{ background: "#ffffff", padding: isMobile ? "40px 0" : "0" }}>
-      <div style={{ position: "relative", width: "100%", height: isMobile ? "auto" : "640px", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", height: isMobile ? "680px" : "640px", overflow: "hidden" }}>
         {/* OUTGOING */}
-        {prSl && sliding && !isMobile && (
-          <div style={{ position: "absolute", inset: 0, display: "grid", gridTemplateColumns: "1fr 1fr", animation: `slideOut${direction > 0 ? "Left" : "Right"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards`, zIndex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center", padding: "0 80px" }}>
+        {prSl && sliding && (
+          <div style={{ position: "absolute", inset: 0, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", animation: `slideOut${direction > 0 ? "Left" : "Right"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards`, zIndex: 1, padding: isMobile ? "0 24px" : "0" }}>
+            <div style={{ display: "flex", alignItems: "center", padding: isMobile ? "0" : "0 80px" }}>
               <div>
                 <h3 style={{ fontSize: "42px", fontWeight: 900, color: C.textHi, marginBottom: "20px" }}>{prSl.heading}</h3>
                 <p style={{ fontSize: "18px", color: C.textMid, lineHeight: 1.7 }}>{prSl.body}</p>
               </div>
             </div>
-            <div style={{ position: "relative", padding: "40px 0" }}>
-              <img src={prSl.image} alt="" style={{ width: "100%", height: "420px", objectFit: "cover", borderRadius: "18px" }} />
+            <div style={{ position: "relative", padding: isMobile ? "0" : "40px 0" }}>
+              <img src={prSl.image} alt="" style={{ width: "100%", height: isMobile ? "280px" : "420px", objectFit: "cover", borderRadius: "18px" }} />
             </div>
           </div>
         )}
@@ -314,7 +314,7 @@ function Slider({ sliderRef }) {
         <div style={{
           position: isMobile ? "relative" : "absolute", inset: 0,
           display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-          animation: sliding && !isMobile ? `slideIn${direction > 0 ? "Right" : "Left"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards` : "none",
+          animation: sliding ? `slideIn${direction > 0 ? "Right" : "Left"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards` : "none",
           zIndex: 2, padding: isMobile ? "0 24px" : "0"
         }}>
           {/* TEXT */}
@@ -554,6 +554,23 @@ export default function LandingPage() {
         @keyframes rotateSlow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideInRight {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutLeft {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(-100%); opacity: 0; }
+        }
+        @keyframes slideOutRight {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
         }
       `}</style>
 
