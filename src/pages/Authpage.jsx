@@ -95,9 +95,9 @@ function AuthNav() {
           padding: isMobile ? "7px 12px" : "10px 18px",
           fontSize: isMobile ? "12px" : "15px",
           borderRadius: "10px",
-          border: `1px solid ${C.greenBdr}`,
-          background: C.greenLite,
-          color: C.greenDark,
+          border: "none",
+          background: C.green,
+          color: "#fff",
           fontWeight: 800,
           fontFamily: C.font,
           cursor: "pointer",
@@ -105,10 +105,10 @@ function AuthNav() {
           whiteSpace: "nowrap"
         }}
         onMouseEnter={(e) =>
-          (e.currentTarget.style.background = C.greenBdr)
+          (e.currentTarget.style.background = C.greenDark)
         }
         onMouseLeave={(e) =>
-          (e.currentTarget.style.background = C.greenLite)
+          (e.currentTarget.style.background = C.green)
         }
       >
         Home
@@ -152,7 +152,7 @@ function SignUpPanel({ onSwitch }) {
     e.preventDefault(); setError(""); setLoading(true)
     const fullPhone = country.prefix + phoneNo.replace(/^0+/, "") // Ensure prefix + number (stripping leading zero)
     try {
-      const user = await apiRegister({ name, phone: fullPhone, role: "member", saccoId })
+      const user = await apiRegister({ name, phone: fullPhone, role: "member", saccoId, pin })
       login(user)
       navigate("/dashboard")
     } catch (err) { setError(err.message || "Registration failed.") }

@@ -161,7 +161,7 @@ function Navbar({ onHome, onFeatures, onAbout, onGetStarted }) {
           Sign In
         </button>
       </div>
-      
+
       {isMobile && (
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "12px" }}>
           <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}>
@@ -210,31 +210,31 @@ function Hero({ heroRef }) {
   const isMobile = width < 900
 
   return (
-    <section ref={heroRef} style={{ 
-      background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #fefce8 70%)", 
-      paddingTop: isMobile ? "100px" : "140px", 
-      paddingBottom: isMobile ? "60px" : "100px", 
-      position: "relative", 
-      overflow: "hidden" 
+    <section ref={heroRef} style={{
+      background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #fefce8 70%)",
+      paddingTop: isMobile ? "100px" : "140px",
+      paddingBottom: isMobile ? "60px" : "100px",
+      position: "relative",
+      overflow: "hidden"
     }}>
       {/* Dynamic Background Elements */}
       <div style={{ position: "absolute", top: "-100px", right: "-100px", width: "600px", height: "600px", borderRadius: "50%", background: "radial-gradient(circle, rgba(21,128,61,0.08) 0%, transparent 70%)", animation: "pulse 8s infinite ease-in-out" }} />
       <div style={{ position: "absolute", bottom: "-50px", left: "-50px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%)", animation: "pulse 10s infinite ease-in-out 2s" }} />
-      
+
 
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "0 24px" : "0 64px", textAlign: "center", position: "relative", zIndex: 2 }}>
 
-        
+
         <h1 style={{ fontSize: isMobile ? "42px" : "62px", fontWeight: 900, color: C.textHi, lineHeight: 1.06, margin: "0 0 22px", fontFamily: C.font, letterSpacing: "-1px" }}>
           Financial Transparency<br />
           <span style={{ color: C.green }}>Every SACCO</span>{" "}
           <span style={{ color: C.goldMid }}>Deserves</span>
         </h1>
         <p style={{ fontSize: isMobile ? "17px" : "20px", color: C.textMid, lineHeight: 1.65, maxWidth: "640px", margin: "0 auto 44px", fontFamily: C.font }}>
-          SenteChain puts every SACCO deposit on the Stellar blockchain, permanently verifiable by any member, regulator, or auditor from their phone in a very short time.
+          SenteChain makes every SACCO penny  visible and permanent verifiable by any member, regulator or auditor from their phone in a very short time.
         </p>
-        
+
         <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginBottom: "80px" }}>
           <button onClick={() => navigate("/register-sacco")} style={{ padding: "18px 40px", borderRadius: "14px", fontFamily: C.font, fontSize: "17px", fontWeight: 800, cursor: "pointer", background: C.green, color: "#fff", border: "none", boxShadow: `0 8px 30px ${C.green}44`, transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C.green}55` }}
@@ -248,7 +248,7 @@ function Hero({ heroRef }) {
           </button>
         </div>
 
-        </div>
+      </div>
     </section>
   )
 }
@@ -307,9 +307,9 @@ function Slider({ sliderRef }) {
         )}
 
         {/* CURRENT */}
-        <div style={{ 
-          position: isMobile ? "relative" : "absolute", inset: 0, 
-          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", 
+        <div style={{
+          position: isMobile ? "relative" : "absolute", inset: 0,
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
           animation: sliding && !isMobile ? `slideIn${direction > 0 ? "Right" : "Left"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards` : "none",
           zIndex: 2, padding: isMobile ? "0 24px" : "0"
         }}>

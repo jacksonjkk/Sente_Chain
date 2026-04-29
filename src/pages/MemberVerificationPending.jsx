@@ -94,29 +94,7 @@ export default function MemberVerificationPending() {
           <StatusBadge status="under_review" />
         </div>
 
-        {/* Progress Card */}
-        <div style={{ ...card(), background: "#fff", padding: isMobile ? "24px" : "32px", marginBottom: "24px" }}>
-          <h2 style={{ fontSize: "16px", fontWeight: 800, marginBottom: "24px", color: T.textHi }}>Onboarding Status</h2>
-          <div style={{ display: "flex", justifyContent: "space-between", position: "relative" }}>
-            <div style={{ position: "absolute", top: "15px", left: "0", right: "0", height: "2px", background: T.border }} />
-            {steps.map((s, i) => (
-              <div key={i} style={{ position: "relative", zIndex: 1, textAlign: "center", width: "20%" }}>
-                <div style={{ 
-                  width: isMobile ? "24px" : "32px", height: isMobile ? "24px" : "32px", borderRadius: "50%", 
-                  background: s.done ? T.green : (s.active ? T.blue : "#fff"),
-                  border: `2px solid ${s.done ? T.green : (s.active ? T.blue : T.border)}`,
-                  color: s.done || s.active ? "#fff" : T.textDim,
-                  display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 8px", fontSize: isMobile ? "10px" : "12px", fontWeight: 800
-                }}>
-                  {s.done ? (
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  ) : i + 1}
-                </div>
-                <p style={{ fontSize: isMobile ? "9px" : "10px", fontWeight: 700, color: s.active ? T.blue : T.textDim, margin: 0, lineHeight: 1.2 }}>{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+
 
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.5fr 1fr", gap: "24px" }}>
           {/* Document Summary */}

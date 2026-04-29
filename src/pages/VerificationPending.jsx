@@ -82,14 +82,20 @@ export default function VerificationPending() {
           )}
         </div>
         <button onClick={() => navigate("/")} style={{
-          fontSize: isMobile ? "12px" : "14px", fontWeight: 700,
-          padding: isMobile ? "8px 16px" : "10px 24px",
-          borderRadius: "9px", cursor: "pointer", fontFamily: T.font,
-          border: `1.5px solid ${T.border}`, background: "#fff",
-          color: T.textMid, transition: "all 0.2s"
+          padding: isMobile ? "7px 12px" : "10px 18px",
+          fontSize: isMobile ? "12px" : "15px",
+          borderRadius: "10px",
+          border: "none",
+          background: T.green,
+          color: "#fff",
+          fontWeight: 800,
+          fontFamily: T.font,
+          cursor: "pointer",
+          transition: "all 0.2s",
+          whiteSpace: "nowrap"
         }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = T.green; e.currentTarget.style.color = T.green }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = T.border; e.currentTarget.style.color = T.textMid }}>
+          onMouseEnter={e => e.currentTarget.style.background = T.greenDark}
+          onMouseLeave={e => e.currentTarget.style.background = T.green}>
           Home
         </button>
       </nav>
@@ -120,27 +126,7 @@ export default function VerificationPending() {
           {/* Main Content */}
           <div style={{ display: "grid", gap: "24px" }}>
             
-            {/* Progress Stepper */}
-            <div style={{ background: "#fff", padding: "32px", borderRadius: "20px", border: `1px solid ${T.border}` }}>
-              <h2 style={{ fontSize: "16px", fontWeight: 800, marginBottom: "24px", color: T.textHi }}>Verification Progress</h2>
-              <div style={{ display: "flex", justifyContent: "space-between", position: "relative" }}>
-                <div style={{ position: "absolute", top: "15px", left: "0", right: "0", height: "2px", background: T.border }} />
-                {steps.map((s, i) => (
-                  <div key={i} style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-                    <div style={{ 
-                      width: "32px", height: "32px", borderRadius: "50%", 
-                      background: s.done ? T.green : (s.active ? T.blue : "#fff"),
-                      border: `2px solid ${s.done ? T.green : (s.active ? T.blue : T.border)}`,
-                      color: s.done || s.active ? "#fff" : T.textDim,
-                      display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 8px", fontSize: "12px", fontWeight: 800
-                    }}>
-                      {s.done ? "✓" : i + 1}
-                    </div>
-                    <p style={{ fontSize: "11px", fontWeight: 700, color: s.active ? T.blue : T.textDim }}>{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+
 
             {/* Action Required (Conditional) */}
             {status === "action_required" && (
