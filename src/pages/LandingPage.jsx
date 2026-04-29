@@ -311,7 +311,7 @@ function Slider({ sliderRef }) {
 
   return (
     <section ref={sliderRef} style={{ background: "#ffffff", padding: isMobile ? "40px 0" : "0" }}>
-      <div style={{ position: "relative", width: "100%", height: isMobile ? "680px" : "640px", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", height: isMobile ? "950px" : "640px", overflow: "hidden" }}>
         {/* OUTGOING */}
         {prSl && sliding && (
           <div style={{ position: "absolute", inset: 0, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", animation: `slideOut${direction > 0 ? "Left" : "Right"} 0.52s cubic-bezier(0.4,0,0.2,1) forwards`, zIndex: 1, padding: isMobile ? "0 24px" : "0" }}>
@@ -322,7 +322,7 @@ function Slider({ sliderRef }) {
               </div>
             </div>
             <div style={{ position: "relative", padding: isMobile ? "0" : "40px 0" }}>
-              <img src={prSl.image} alt="" style={{ width: "100%", height: isMobile ? "280px" : "420px", objectFit: "cover", borderRadius: "18px" }} />
+              <img src={prSl.image} alt="" style={{ width: "100%", height: isMobile ? "auto" : "420px", maxHeight: isMobile ? "300px" : "none", objectFit: "cover", borderRadius: "18px" }} />
             </div>
           </div>
         )}
@@ -347,7 +347,7 @@ function Slider({ sliderRef }) {
           </div>
           {/* IMAGE */}
           <div style={{ position: "relative", padding: isMobile ? "0" : "50px 0" }}>
-            <img src={sl.image} alt="" style={{ width: "100%", height: isMobile ? "280px" : "420px", objectFit: "cover", borderRadius: "22px" }} />
+            <img src={sl.image} alt="" style={{ width: "100%", height: isMobile ? "auto" : "420px", maxHeight: isMobile ? "300px" : "none", objectFit: "cover", borderRadius: "22px" }} />
             {!isMobile && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(255,255,255,0.2), transparent)" }} />}
           </div>
         </div>
