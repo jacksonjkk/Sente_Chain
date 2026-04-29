@@ -168,7 +168,7 @@ export default function AdminDashboard() {
                             </td>
                             <td style={{ padding: "15px 20px", fontSize: "15px", fontWeight: 700, color: typeColor[tx.type] || T.textHi }}>{tx.type}</td>
                             <td style={{ padding: "15px 20px", fontFamily: T.fontMono, fontSize: "15px", fontWeight: 800, color: T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</td>
-                            <td style={{ padding: "15px 20px", fontFamily: T.fontMono, fontSize: "12px", color: T.textDim }}>{tx.entry_type === "MPESA" ? "M-Pesa" : "Admin"}</td>
+                            <td style={{ padding: "15px 20px", fontFamily: T.fontMono, fontSize: "12px", color: T.textDim }}>{tx.entry_type === "MPESA" ? "Mobile Money" : "Admin"}</td>
                             <td style={{ padding: "15px 20px" }}><StellarHashLink hash={tx.stellar_tx_hash} /></td>
                           </tr>
                         )

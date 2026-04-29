@@ -19,7 +19,7 @@ function useWindowSize() {
 }
 
 const methodBadge = {
-  MPESA:{ bg:T.greenLite, color:T.green,   bdr:T.greenBdr, label:"M-Pesa" },
+  MPESA:{ bg:T.greenLite, color:T.green,   bdr:T.greenBdr, label:"Mobile Money" },
   ADMIN:{ bg:T.goldLite,  color:T.goldMid, bdr:T.goldBdr,  label:"Admin"  },
 }
 const typeColor = { Deposit:T.green, Loan:T.goldMid, Repayment:"#059669" }
@@ -89,7 +89,7 @@ export default function MemberDashboard() {
           </div>
           <div>
             <p style={{ fontSize:"15px", fontWeight:700, color:T.textHi, marginBottom:"4px" }}>Blockchain verified transactions</p>
-            <p style={{ fontSize:"14px", color:T.textMid, lineHeight:1.6 }}>Every deposit is automatically sealed on Stellar the moment your M-Pesa payment is received. Click any hash below to verify independently, no trust required.</p>
+            <p style={{ fontSize:"14px", color:T.textMid, lineHeight:1.6 }}>Every deposit is automatically sealed on Stellar the moment your mobile money payment is received. Click any hash below to verify independently, no trust required.</p>
           </div>
         </div>
 
@@ -99,7 +99,7 @@ export default function MemberDashboard() {
             <div style={{ padding:"6px 14px", borderRadius:"8px", background:T.greenLite, border:`1px solid ${T.greenBdr}` }}>
               <span style={{ fontSize:"14px", fontWeight:800, color:T.green, fontFamily:T.fontMono }}>Dial *334#</span>
             </div>
-            <span style={{ fontSize:"14px", fontWeight:600, color:T.textMid }}>Safaricom M-Pesa</span>
+            <span style={{ fontSize:"14px", fontWeight:600, color:T.textMid }}>Mobile Money</span>
           </div>
         </div>
 
@@ -163,7 +163,7 @@ export default function MemberDashboard() {
           )}
           <div style={{ padding:"12px 24px", borderTop:`1px solid ${T.border2}`, background:T.surface }}>
             <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textXdim, margin:0 }}>
-              All deposits confirmed automatically via Safaricom M-Pesa. Every hash independently verifiable on Stellar.
+              All deposits confirmed automatically via Mobile Money. Every hash independently verifiable on Stellar.
             </p>
           </div>
         </div>

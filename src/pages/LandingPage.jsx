@@ -35,8 +35,8 @@ const SLIDES = [
     accent: C.goldMid, accentLite: C.goldLite, accentBdr: C.goldBdr, image: "/image1.png",
   },
   {
-    heading: (<>Pay via <span style={{ color: C.green }}>Safaricom M-Pesa</span></>),
-    body: "SenteChain integrates directly with Safaricom M-Pesa, allowing members to deposit or repay loans using familiar USSD codes. Once a payment is made, the system automatically detects the transaction, matches it to the correct member account, and updates the SACCO ledger instantly without manual intervention.",
+    heading: (<>Pay via <span style={{ color: C.green }}>Mobile Money</span></>),
+    body: "SenteChain integrates directly with regional mobile money providers, allowing members to deposit or repay loans using familiar USSD codes. Once a payment is made, the system automatically detects the transaction, matches it to the correct member account, and updates the SACCO ledger instantly without manual intervention.",
     accent: C.green, accentLite: C.greenLite, accentBdr: C.greenBdr, image: "/image7.jpg",
   },
   {
@@ -239,19 +239,36 @@ function Hero({ heroRef }) {
           SenteChain makes every SACCO penny  visible and permanent verifiable by any member, regulator or auditor from their phone in a very short time.
         </p>
 
-        <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginBottom: "80px" }}>
+        <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginBottom: "24px" }}>
           <button onClick={() => navigate("/register-sacco")} style={{ padding: "18px 40px", borderRadius: "14px", fontFamily: C.font, fontSize: "17px", fontWeight: 800, cursor: "pointer", background: C.green, color: "#fff", border: "none", boxShadow: `0 8px 30px ${C.green}44`, transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 40px ${C.green}55` }}
             onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 8px 30px ${C.green}44` }}>
             Onboard Your SACCO
           </button>
-          <button onClick={() => navigate("/auth?tab=login")} style={{ padding: "18px 40px", borderRadius: "14px", fontFamily: C.font, fontSize: "17px", fontWeight: 700, cursor: "pointer", background: "#fff", color: C.textHi, border: `1.5px solid ${C.border}`, transition: "all 0.2s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#f8fafc"; e.currentTarget.style.transform = "translateY(-3px)" }}
+          <button onClick={() => navigate("/auth?tab=login")} style={{ padding: "18px 60px", borderRadius: "14px", fontFamily: C.font, fontSize: "17px", fontWeight: 700, cursor: "pointer", background: "#fff", color: C.green, border: `1.5px solid ${C.border}`, transition: "all 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#f0fdf4"; e.currentTarget.style.transform = "translateY(-3px)" }}
             onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.transform = "translateY(0)" }}>
             Sign In
           </button>
         </div>
 
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: isMobile ? "24px" : "0", flexWrap: "wrap", borderTop: `1px solid ${C.border}`, paddingTop: "24px", paddingBottom: "20px", maxWidth: "1100px", margin: "0 auto" }}>
+          {[
+            { val: "41,000+", label: "SACCOS IN EAST AFRICA", color: C.green },
+            { val: "4M+", label: "MEMBERS", color: C.goldMid },
+            { val: "10s", label: "BLOCKCHAIN SEAL", color: C.green },
+            { val: "100%", label: "VERIFIABLE", color: C.goldMid },
+          ].map((s, i) => (
+            <div key={s.label} style={{ 
+              flex: 1, minWidth: isMobile ? "140px" : "0", textAlign: "center",
+              borderRight: !isMobile && i < 3 ? `1px solid ${C.border}` : "none",
+              padding: isMobile ? "10px" : "0 20px"
+            }}>
+              <p style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 900, color: s.color, margin: "0 0 8px", fontFamily: C.font, letterSpacing: "-1px" }}>{s.val}</p>
+              <p style={{ fontSize: "11px", fontWeight: 700, color: "#71717a", textTransform: "uppercase", letterSpacing: "1.2px", fontFamily: C.font }}>{s.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -348,7 +365,7 @@ function About({ aboutRef }) {
   const isMobile = width < 900
   const cards = [
     { title: "Blockchain Verified", body: "Every transaction is sealed on Stellar, publicly verifiable, permanently immutable, zero trust required.", accent: C.green, lite: C.greenLite, bdr: C.greenBdr },
-    { title: "M-Pesa Native", body: "Safaricom M-Pesa deposits arrive automatically. Members pay the way they already do.", accent: C.goldMid, lite: C.goldLite, bdr: C.goldBdr },
+    { title: "Mobile Wallets", body: "Direct mobile money deposits arrive automatically. Members pay the way they already do.", accent: C.goldMid, lite: C.goldLite, bdr: C.goldBdr },
     { title: "Role-Based Access", body: "Members, cashiers, and admins each see exactly what they need. Staff access codes protect elevated functions.", accent: C.green, lite: C.greenLite, bdr: C.greenBdr },
     { title: "Instant SMS Proof", body: "Every confirmed transaction sends an SMS to the member with a Stellar hash link they can verify independently.", accent: C.goldMid, lite: C.goldLite, bdr: C.goldBdr },
   ]
@@ -387,7 +404,7 @@ function CTA({ ctaRef }) {
 
   const points = [
     { accent: C.green, text: "Every deposit sealed on Stellar in under 10 seconds" },
-    { accent: C.goldMid, text: "M-Pesa payments matched to member accounts automatically" },
+    { accent: C.goldMid, text: "Mobile money payments matched to member accounts automatically" },
     { accent: C.green, text: "Members verify their own records from any phone" },
     { accent: C.goldMid, text: "Cashiers monitor loans with full repayment schedules" },
     { accent: C.green, text: "Admins register members, assign roles, and view audit logs" },
@@ -498,7 +515,7 @@ function Footer() {
           {[
             { title: "Platform", links: ["Member Dashboard", "Cashier Portal", "Admin Dashboard", "Public Ledger"] },
             { title: "Company", links: ["About", "Contact Us", "Blog", "Careers"] },
-            { title: "Resources", links: ["Stellar Network", "Safaricom M-Pesa", "Africa's Talking"] },
+            { title: "Resources", links: ["Stellar Network", "Mobile Money API", "Africa's Talking"] },
           ].map(col => (
             <div key={col.title}>
               <p style={{ fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: "16px", fontFamily: C.fontMono }}>{col.title}</p>

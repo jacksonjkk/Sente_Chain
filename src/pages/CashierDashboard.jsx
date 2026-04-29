@@ -20,7 +20,7 @@ function useWindowSize() {
 }
 
 const methodBadge = {
-  MPESA:{ bg:T.greenLite, color:T.green,   bdr:T.greenBdr, label:"M-Pesa" },
+  MPESA:{ bg:T.greenLite, color:T.green,   bdr:T.greenBdr, label:"Mobile Money" },
   ADMIN:{ bg:T.goldLite,  color:T.goldMid, bdr:T.goldBdr,  label:"Admin"  },
 }
 const typeColor = { Deposit:T.green, Loan:T.goldMid, Repayment:"#059669" }

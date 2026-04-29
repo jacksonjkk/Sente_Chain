@@ -142,9 +142,9 @@ export default function SACCOPublicView() {
                   <p style={{ fontSize:"14px", color:T.textMid, lineHeight:1.65, marginBottom:"18px" }}>Every transaction is permanently sealed on the Stellar blockchain. Click any hash to verify directly, no trust required.</p>
                   <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
                     {[
-                      {label:"Latest deposit",   sub:"M-Pesa auto-confirmed",  hash:recentTxs.find(t=>t.type==="Deposit")?.stellar_tx_hash  },
+                      {label:"Latest deposit",   sub:"Mobile money auto-confirmed",  hash:recentTxs.find(t=>t.type==="Deposit")?.stellar_tx_hash  },
                       {label:"Latest loan",      sub:"Admin recorded",          hash:recentTxs.find(t=>t.type==="Loan")?.stellar_tx_hash     },
-                      {label:"Latest repayment", sub:"M-Pesa auto-confirmed",  hash:recentTxs.find(t=>t.type==="Repayment")?.stellar_tx_hash },
+                      {label:"Latest repayment", sub:"Mobile money auto-confirmed",  hash:recentTxs.find(t=>t.type==="Repayment")?.stellar_tx_hash },
                     ].map(item => (
                       <div key={item.label} style={{ ...card(), padding:"14px 16px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                         <div>
@@ -170,7 +170,7 @@ export default function SACCOPublicView() {
                         onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
                         <div>
                           <p style={{ fontSize:"14px", fontWeight:700, color:T.textHi, margin:"0 0 2px" }}>{tx.type}</p>
-                          <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{tx.entry_type==="MPESA"?"M-Pesa":"Admin"}</p>
+                          <p style={{ fontSize:"12px", fontFamily:T.fontMono, color:T.textDim, margin:0 }}>{tx.entry_type==="MPESA"?"Mobile Money":"Admin"}</p>
                         </div>
                         <span style={{ fontFamily:T.fontMono, fontSize:"14px", fontWeight:800, color:typeColor[tx.type]||T.textHi }}>{currency} {tx.amount_kes.toLocaleString()}</span>
                       </div>
