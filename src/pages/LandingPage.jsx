@@ -244,7 +244,7 @@ function Hero({ heroRef }) {
           <button onClick={() => navigate("/auth?tab=login")} style={{ padding: "18px 40px", borderRadius: "14px", fontFamily: C.font, fontSize: "17px", fontWeight: 700, cursor: "pointer", background: "#fff", color: C.textHi, border: `1.5px solid ${C.border}`, transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.background = "#f8fafc"; e.currentTarget.style.transform = "translateY(-3px)" }}
             onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.transform = "translateY(0)" }}>
-            Member Access
+            Sign In
           </button>
         </div>
 
